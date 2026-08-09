@@ -28,6 +28,9 @@ public final class Mesh
 
     public static Mesh create(float[] vertices)
     {
+        if(vertices.length % 2 != 0)
+            throw new IllegalArgumentException("Vertices must be in a pair of 2");
+
         VertexBuffer vbo = VertexBuffer.create();
         VertexArray vao = VertexArray.create();
 

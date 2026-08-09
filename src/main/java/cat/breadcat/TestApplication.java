@@ -54,6 +54,7 @@ public final class TestApplication extends Application
     @Override
     protected void shutdown()
     {
-
+        square1.close();
+        square2.close();
     }
 }
