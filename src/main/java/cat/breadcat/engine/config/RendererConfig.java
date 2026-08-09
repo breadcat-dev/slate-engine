@@ -1,7 +1,7 @@
 package cat.breadcat.engine.config;
 
 
-import cat.breadcat.engine.Color;
+import cat.breadcat.engine.graphics.Color;
 
 
 public final class RendererConfig

@@ -1,6 +1,6 @@
 package cat.breadcat;
 
-import cat.breadcat.engine.Color;
+import cat.breadcat.engine.graphics.Color;
 import cat.breadcat.engine.config.ApplicationConfig;
 import cat.breadcat.engine.config.RendererConfig;
 import cat.breadcat.engine.config.WindowConfig;

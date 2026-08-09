@@ -1,4 +1,4 @@
-package cat.breadcat.engine;
+package cat.breadcat.engine.graphics;
 
 
 import cat.breadcat.math.vectors.Vector3f;

@@ -11,8 +11,10 @@ public final class TestApplication extends Application
 {
     // ===== Fields =====
 
-    private Mesh square1;
-    private Mesh square2;
+    private Mesh cross1;
+    private Mesh cross2;
+    private Mesh cross3;
+    private Mesh cross4;
 
     // ===== Constructors =====
 
@@ -26,15 +28,25 @@ public final class TestApplication extends Application
     @Override
     protected void init()
     {
-        square1 = Mesh.create(new float[]{
-                -0.5f,  0.5f,
-                -0.5f, -0.5f,
-                 0.5f, -0.5f
+        cross1 = Mesh.create(new float[]{
+                -0.1f,  0.9f,
+                -0.1f, -0.9f,
+                 0.1f, -0.9f
         });
-        square2 = Mesh.create(new float[]{
-                -0.5f,  0.5f,
-                 0.5f,  0.5f,
-                 0.5f, -0.5f
+        cross2 = Mesh.create(new float[]{
+                -0.1f,  0.9f,
+                 0.1f,  0.9f,
+                 0.1f, -0.9f
+        });
+        cross3 = Mesh.create(new float[]{
+                -0.3f,  0.5f,
+                -0.3f,  0.2f,
+                 0.3f,  0.2f
+        });
+        cross4 = Mesh.create(new float[]{
+                -0.3f,  0.5f,
+                 0.3f,  0.5f,
+                 0.3f,  0.2f
         });
     }
 
@@ -47,14 +59,18 @@ public final class TestApplication extends Application
     @Override
     protected void render(Renderer renderer)
     {
-        renderer.render(square1);
-        renderer.render(square2);
+        renderer.render(cross1);
+        renderer.render(cross2);
+        renderer.render(cross3);
+        renderer.render(cross4);
     }
 
     @Override
     protected void shutdown()
     {
-        square1.close();
-        square2.close();
+        cross1.close();
+        cross2.close();
+        cross3.close();
+        cross4.close();
     }
 }

@@ -4,7 +4,7 @@ package cat.breadcat.engine.graphics.renderer;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL20.*;
 
-import cat.breadcat.engine.Color;
+import cat.breadcat.engine.graphics.Color;
 import cat.breadcat.engine.config.RendererConfig;
 import cat.breadcat.engine.graphics.mesh.Mesh;
 import cat.breadcat.engine.graphics.shader.ShaderProgram;
@@ -83,7 +83,7 @@ public final class OpenGLRenderer implements Renderer
 
         basicShader.bind();
         basicShader.set("uModel", Matrix4f.identity());
-        basicShader.set("uColor", Color.rgb8(0, 0, 255).vec4());
+        basicShader.set("uColor", Color.rgb8(255, 125, 255).vec4());
         mesh.bind();
 
         glDrawArrays(GL_TRIANGLES, 0, mesh.vertexCount());
