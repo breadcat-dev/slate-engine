@@ -61,7 +61,7 @@ implementation("cat.breadcat.slate:engine:<version>")
 
 ## Dependencies
 
-- Slate Engine - Math - [Github](https://github.com/breadcat-dev/slate-math)
+- `Slate Engine - Math` - [Github](https://github.com/breadcat-dev/slate-math)
 
 ## License
 
