@@ -131,6 +131,3 @@ gradle-app.setting
 .idea/
 
 STRUCTURE
-generator
-
-src/test

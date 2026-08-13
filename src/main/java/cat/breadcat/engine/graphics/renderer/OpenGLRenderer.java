@@ -6,7 +6,9 @@ import static org.lwjgl.opengl.GL20.*;
 
 import cat.breadcat.engine.graphics.Color;
 import cat.breadcat.engine.config.RendererConfig;
+import cat.breadcat.engine.graphics.Transform;
 import cat.breadcat.engine.graphics.mesh.Mesh;
+import cat.breadcat.engine.graphics.mesh.Renderable;
 import cat.breadcat.engine.graphics.shader.ShaderProgram;
 import cat.breadcat.math.matrices.Matrix4f;
 
@@ -77,13 +79,16 @@ public final class OpenGLRenderer implements Renderer
     // ===== Rendering =====
 
     @Override
-    public void render(Mesh mesh)
+    public void render(Renderable renderable)
     {
-        Objects.requireNonNull(mesh, "mesh");
+        Objects.requireNonNull(renderable, "renderable");
+
+        Transform transform = renderable.transform();
+        Mesh mesh = renderable.mesh();
 
         basicShader.bind();
-        basicShader.set("uModel", Matrix4f.identity());
-        basicShader.set("uColor", Color.rgb8(255, 125, 255).vec4());
+        basicShader.set("uModel", transform.toMatrix());
+        basicShader.set("uColor", Color.rgb8(255, 200, 45).vec4());
         mesh.bind();
 
         glDrawArrays(GL_TRIANGLES, 0, mesh.vertexCount());

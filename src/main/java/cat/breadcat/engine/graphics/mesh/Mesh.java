@@ -28,8 +28,8 @@ public final class Mesh
 
     public static Mesh create(float[] vertices)
     {
-        if(vertices.length % 2 != 0)
-            throw new IllegalArgumentException("Vertices must be in a pair of 2");
+        if(vertices.length % 3 != 0)
+            throw new IllegalArgumentException("Vertices must be in a pair of 3");
 
         VertexBuffer vbo = VertexBuffer.create();
         VertexArray vao = VertexArray.create();
@@ -40,17 +40,17 @@ public final class Mesh
         vbo.upload(vertices);
         vao.attribute(
                 0,
-                2,
+                3,
                 GL_FLOAT,
                 false,
-                2 * Float.BYTES,
+                3 * Float.BYTES,
                 0
         );
 
         vbo.unbind();
         vao.unbind();
 
-        return new Mesh(vbo, vao, vertices.length / 2);
+        return new Mesh(vbo, vao, vertices.length / 3);
     }
 
     // ===== Binding =====

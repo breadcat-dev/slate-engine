@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cat.breadcat.slate:math:0.1.0-alpha")
+    implementation("cat.breadcat.slate:math:0.2.0")
 
     implementation(platform("org.lwjgl:lwjgl-bom:3.3.6"))
 

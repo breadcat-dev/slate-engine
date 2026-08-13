@@ -1,12 +1,12 @@
 package cat.breadcat.engine.graphics.renderer;
 
 
-import cat.breadcat.engine.graphics.mesh.Mesh;
+import cat.breadcat.engine.graphics.mesh.Renderable;
 
 
 public interface Renderer
 {
-    void render(Mesh mesh);
+    void render(Renderable renderable);
     void clear();
     void close();
 }
