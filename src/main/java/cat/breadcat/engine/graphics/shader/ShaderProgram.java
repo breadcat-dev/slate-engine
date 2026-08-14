@@ -73,7 +73,7 @@ public final class ShaderProgram
 
         glUniformMatrix4fv(
                 findUniform(name),
-                false,
+                true,
                 new float[]{
                         value.m00(), value.m01(), value.m02(), value.m03(),
                         value.m10(), value.m11(), value.m12(), value.m13(),

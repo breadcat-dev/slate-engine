@@ -10,14 +10,6 @@ import java.util.Objects;
 
 public final class Transform
 {
-    // ===== Constants =====
-
-    private static final Transform ZERO = new Transform(
-            Vector3f.zero(),
-            Quaternionf.identity(),
-            Vector3f.one()
-    );
-
     // ===== Fields =====
 
     private Vector3f position;
@@ -28,7 +20,7 @@ public final class Transform
 
     private Transform(Vector3f position, Quaternionf rotation, Vector3f scale)
     {
-        Objects.requireNonNull(position, "position");
+        Objects.requireNonNull(position, "translation");
         Objects.requireNonNull(rotation, "rotation");
         Objects.requireNonNull(scale, "scale");
 
@@ -46,7 +38,11 @@ public final class Transform
 
     public static Transform zero()
     {
-        return ZERO;
+        return new Transform(
+                Vector3f.zero(),
+                Quaternionf.identity(),
+                Vector3f.one()
+        );
     }
 
     // ===== Setters =====

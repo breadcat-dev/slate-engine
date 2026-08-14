@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL20.*;
 import cat.breadcat.engine.graphics.Color;
 import cat.breadcat.engine.config.RendererConfig;
 import cat.breadcat.engine.graphics.Transform;
+import cat.breadcat.engine.graphics.camera.Camera;
 import cat.breadcat.engine.graphics.mesh.Mesh;
 import cat.breadcat.engine.graphics.mesh.Renderable;
 import cat.breadcat.engine.graphics.shader.ShaderProgram;
@@ -23,13 +24,15 @@ public final class OpenGLRenderer implements Renderer
                 """
                 #version 330 core
 
-                layout(location = 0) in vec2 pos;
+                layout(location = 0) in vec3 pos;
 
                 uniform mat4 uModel;
+                uniform mat4 uView;
+                uniform mat4 uPerspective;
 
                 void main()
                 {
-                    gl_Position = uModel * vec4(pos, 0.0, 1.0);
+                    gl_Position = uPerspective * uView * uModel * vec4(pos, 1.0);
                 }
                 """;
     private static final String BASIC_FRAGMENT_SHADER =
@@ -45,6 +48,8 @@ public final class OpenGLRenderer implements Renderer
                     fragColor = uColor;
                 }
                 """;
+
+    private static final Camera TEST_CAMERA = Camera.create();
 
     // ===== Fields =====
 
@@ -68,6 +73,7 @@ public final class OpenGLRenderer implements Renderer
     {
         Objects.requireNonNull(config, "config");
 
+        glEnable(GL_DEPTH_TEST);
         if(config.vsync())
             glfwSwapInterval(1);
         Color clearColor = config.clearColor();
@@ -81,14 +87,21 @@ public final class OpenGLRenderer implements Renderer
     @Override
     public void render(Renderable renderable)
     {
-        Objects.requireNonNull(renderable, "renderable");
+    Objects.requireNonNull(renderable, "renderable");
 
         Transform transform = renderable.transform();
         Mesh mesh = renderable.mesh();
 
         basicShader.bind();
+        basicShader.set("uPerspective", Matrix4f.perspective(
+                TEST_CAMERA.getFieldOfView(),
+                1280.0f / 720.0f,
+                TEST_CAMERA.getNearPlane(),
+                TEST_CAMERA.getFarPlane()
+        ));
+        basicShader.set("uView", TEST_CAMERA.transform().toMatrix().inverse());
         basicShader.set("uModel", transform.toMatrix());
-        basicShader.set("uColor", Color.rgb8(255, 200, 45).vec4());
+        basicShader.set("uColor", Color.rgb8(200, 0, 255).vec4());
         mesh.bind();
 
         glDrawArrays(GL_TRIANGLES, 0, mesh.vertexCount());
@@ -100,7 +113,7 @@ public final class OpenGLRenderer implements Renderer
     @Override
     public void clear()
     {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     // ===== Lifecycle =====
