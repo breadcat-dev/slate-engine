@@ -77,7 +77,7 @@ public final class TestApplication extends Application
 
                 -0.5f, 0.5f, 0.5f,
                 0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f,
+                0.5f, 0.5f, 0.5f,
 
 
                 -0.5f, -0.5f, 0.5f,
@@ -109,11 +109,12 @@ public final class TestApplication extends Application
         else
             j++;
 
-        square1.transform().setRotation(Quaternionf.fromAxisAngle(Vector3f.unitX(), (float)Math.toRadians(i)));
-        square1.transform().setRotation(Quaternionf.fromAxisAngle(Vector3f.unitY(), (float)Math.toRadians(i)));
-        square2.transform().setRotation(Quaternionf.fromAxisAngle(Vector3f.unitX(), (float)Math.toRadians(i)));
-        square2.transform().setRotation(Quaternionf.fromAxisAngle(Vector3f.unitY(), (float)Math.toRadians(i)));
-        //square.transform().setRotation(Quaternionf.fromAxisAngle(Vector3f.unitY(), (float)Math.toRadians(100)));
+        Quaternionf rotation =
+                Quaternionf.fromAxisAngle(Vector3f.unitX(), (float)Math.toRadians(i)).multiply(
+                Quaternionf.fromAxisAngle(Vector3f.unitY(), (float)Math.toRadians(i))).multiply(
+                Quaternionf.fromAxisAngle(Vector3f.unitZ(), (float)Math.toRadians(i)));
+        square1.transform().setRotation(rotation);
+        square2.transform().setRotation(rotation);
         square2.transform().setPosition(Vector3f.of(-2, j / -100.0f, -2));
         square1.transform().setPosition(Vector3f.of(5, j / 100.0f, -5));
     }
