@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "cat.breadcat.slate"
-version = "0.1.0-pre-alpha"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
